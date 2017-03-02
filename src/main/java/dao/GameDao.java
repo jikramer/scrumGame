@@ -11,12 +11,15 @@ public class GameDao {
 	  
 	}
 
+	/**
+	 * test comment
+	 * @return
+	 */
 	public ArrayList<String> getAnswers(){
 		ArrayList<String> answers = new ArrayList<String>();
-		
-		System.out.println("returning answers from db");
 	
-		
+		System.out.println("returning answers from db");
+			
 		return answers;
 	}
 	
