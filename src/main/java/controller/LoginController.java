@@ -9,22 +9,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.User;
+import service.LoginHandler;
  
 @Controller
-@ResponseBody
+@ResponseBody	
 public class LoginController {
  	
 	 @GetMapping("/")
 	    public ModelAndView greetingForm(Model model) {
-	      return new ModelAndView("login");
+	      return new ModelAndView("login", "user", new User());
  	 }
 
 	 @PostMapping("/login")
 	 public ModelAndView login(@ModelAttribute User login ) {
-	     System.out.println("userName: " + login.getUserName());
-	     System.out.println("password: " + login.getPassword());
+		// TODO: check username & pw are valid.. 
+	    LoginHandler loginHandler = new LoginHandler();	     
+	    boolean isValid = loginHandler.authenticateUser(login.getUserName(), login.getPassword());
+	     
+	    if(!isValid){
+	    	login.setHasErrors(true);
+	    	
+	    	return new ModelAndView("login", "user", login );
+	    }
+	    else	
+	    	return new ModelAndView("dashboard", "user", login );
 	 
-		 return new ModelAndView("dashboard", "user", login );
 	 }
  
 	 @PostMapping("/registration")

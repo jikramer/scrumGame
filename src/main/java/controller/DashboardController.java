@@ -1,16 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import groovyjarjarantlr.collections.List;
 import model.Questionaire;
-import model.User;
 
 @RestController
 public class DashboardController {

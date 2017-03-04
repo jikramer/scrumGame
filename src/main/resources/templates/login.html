@@ -12,6 +12,8 @@
   <h2>Login</h2> 
    <form action="#" th:action="@{/login}" th:method="post">
   
+  	<p class="alert alert-danger" th:if="${user.userName} != null" th:text="${user.loginErrorMessage}"></p>
+    
     <div class="form-group">
       <label for="lblUserName">User Name: </label>
       <input type="text" class="form-control" id="uName" name="userName" placeholder="Enter username"></input>
