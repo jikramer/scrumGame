@@ -5,7 +5,7 @@ public class User {
 	private int id;
 	private String userName;
 	private String password;
-	private int userDetailsId;
+	private UserDetails userDetails;
 	
 	//todo: find a better home for these
 	private boolean hasErrors;
@@ -23,11 +23,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getUserDetailsId() {
-		return userDetailsId;
+	
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
-	public void setUserDetailsId(int userDetailsId) {
-		this.userDetailsId = userDetailsId;
+	
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 	public int getId() {
 		return id;

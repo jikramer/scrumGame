@@ -8,43 +8,52 @@
 </head>
 <body>
 
-<div class="container">
-  <h2>Scrum Game Registration</h2> 
-   <form action="#" th:action="@{/register}" th:method="post">
-  
-    <div class="form-group">
-      <label for="lblUserName">User Name: </label>
-      <input type="text" class="form-control" id="uName" name="userName" placeholder="Enter username"></input>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pword" name="password" placeholder="Enter password"></input>
-    </div>
-    
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="name" class="form-control" id="name" name="name" placeholder="name"></input>
-    </div>
-  
-  
-    <div class="form-group">
-      <label for="rank">Rank:</label>
-      <input type="name" class="form-control" id="rank" name="rank" placeholder="rank"></input>
-    </div>
-    
-    
-    <div class="form-group">
-      <label for="ss">SS#:</label>
-      <input type="name" class="form-control" id="ss" name="ss" placeholder="ss#"></input>
-    </div>
-    
-  
-    
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-  
+	<div class="container">
+	  <h2>Scrum Game Registration</h2> 
 
-</div>
+	   <form action="#" th:action="@{/register}" th:object="${User}"  th:method="post">
+	
+	    <div class="form-group">
+	      <label for="lblUserName">User Name: </label>
+	      <input type="text" th:field="*{userName}" class="form-control"  placeholder="Enter username"></input>
+	    </div>
+	
+	    <div class="form-group">
+	      <label for="lblPassword">Password: </label>
+	      <input type="text" th:field="*{password}" class="form-control"  placeholder="Enter password"></input>
+	    </div>
+	
+	
+	    <div class="form-group">
+	      <label for="lblFirstName">First Name: </label>
+	      <input type="text" th:field="*{userDetails.firstName}" class="form-control"  placeholder="Enter First Name"></input>
+	    </div>
+	
+	
+	    <div class="form-group">
+	      <label for="lblLastName">Last Name: </label>
+	      <input type="text" th:field="*{userDetails.lastName}" class="form-control"  placeholder="Enter Last Name"></input>
+	    </div>
+	    
+	    <div class="form-group">
+	      <label for="lblEmail">Email: </label>
+	      <input type="text" th:field="*{userDetails.email}" class="form-control"  placeholder="Enter Email"></input>
+	    </div>
+	    
+	    <!-- TODO - switch to dropdown -->
+	    <div class="form-group">
+	      <label for="lblUserType"> UserType: </label>
+	      <input type="text" th:field="*{userDetails.userType}" class="form-control"  placeholder="Enter User Type ( Student / Faculty )"></input>
+	    </div>
+	    
+	    
+	
+	
+    <div class="form-group">
+    	 <button type="submit" class="btn btn-default">Submit</button>
+  	</div>
+	  </form>  
+	</div>
 
 </body> 
 </html>

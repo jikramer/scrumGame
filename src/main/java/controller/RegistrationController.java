@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.User;
+import service.RegistrationHandler;
  
 @Controller
 @ResponseBody
@@ -16,23 +17,16 @@ public class RegistrationController {
 
 	 @GetMapping("/showreg")
 	    public ModelAndView greetingForm(Model model) {
-	      return new ModelAndView("registration");
+	      return new ModelAndView("registration", "User", new User());
 	 }
 
 	
 	 @PostMapping("/register")
 	 public ModelAndView register(User login) {
-	     System.out.println("in new user registration"); 
-
-
-	     System.out.println("userName: " + login.getUserName());
-	     System.out.println("password: " + login.getPassword());
-	 
-	     //create & call registerService
-	     //create & call registerDAO
-	     
+		 
+		 RegistrationHandler handler = new RegistrationHandler();
+		 handler.createUser(login);
 		 return new ModelAndView("dashboard", "user", login );
-	
 	 }
 	 
 }

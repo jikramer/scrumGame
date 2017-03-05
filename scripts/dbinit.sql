@@ -3,15 +3,17 @@ GO
 use scrumgame
 GO
 
-
 CREATE TABLE `scrumgame`.`user` (
   `id` INT NOT NULL,
   `username` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
-  `userdetails_id` INT NULL,
   PRIMARY KEY (`id`));
 
 GO
+
+ALTER TABLE `scrumgame`.`user` 
+ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);
+
 
 CREATE TABLE `scrumgame`.`user_details` (
   `id` INT NOT NULL,
@@ -23,4 +25,27 @@ CREATE TABLE `scrumgame`.`user_details` (
 
 
 insert into user values
-(1, "aquaman", "password",1)
+(1, "aquaman", "password")
+
+
+
+USE `scrumgame`;
+DROP procedure IF EXISTS `spCreateUser`;
+
+DELIMITER $$
+USE `scrumgame`$$
+CREATE PROCEDURE spCreateUser(userName varchar(45), pw varchar(45))
+BEGIN
+declare maxUserId int;
+
+select max(id) + 1 into maxUserId from user; 
+
+insert into user values
+(maxUserId, userName, pw);
+
+END;$$
+
+DELIMITER ;
+
+call spCreateUser ("superman", "password");
+

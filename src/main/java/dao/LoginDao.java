@@ -24,7 +24,6 @@ public class LoginDao {
 	        user.setId(rs.getInt("id"));
 	        user.setUserName(rs.getString("username"));
 	        user.setPassword(rs.getString("password"));
-	        user.setUserDetailsId(rs.getInt("userdetails_id"));
 	         
 	      }
 	      st.close();
