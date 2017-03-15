@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.LoginDao;
+import dao.UserDetailsDao;
 import model.Questionaire;
+import model.User;
+import model.UserDetails;
 import service.GameHandler;
 
  
@@ -37,9 +41,17 @@ public class GameController {
 		System.out.println("userName from session: " + userName);
 		
 		GameHandler gameHandler = new GameHandler();
-		gameHandler.save(userName, questionaire);
-		 
-		 return new ModelAndView("done");
+	
+		int score = gameHandler.scoreGame(userName, questionaire);
+		
+		gameHandler.save(userName, score);
+		User user = new User();
+		user.setUserName(userName);
+		
+		UserDetailsDao userDetailsDao = new UserDetailsDao();
+		UserDetails userDetails = userDetailsDao.getUserDetails(user);
+		
+		return new ModelAndView("score","UserDetails", userDetails );
 	
 	}
 }

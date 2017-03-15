@@ -1,27 +1,39 @@
 package dao;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import model.Questionaire;
-//change
+import utils.DBUtils;
+
 public class GameDao {
 
-	public void saveAnswers(Questionaire loadedQuestionaire){
-		
-		System.out.println(loadedQuestionaire.getAnswer1());
-		 
-	}
-
-	/**
-	 * test comment
-	 * @return
-	 */
-	public ArrayList<String> getAnswers(){
-		ArrayList<String> answers = new ArrayList<String>();
-	
-		System.out.println("returning answers from db");
+	public void saveScore(String userName, int score){
+		  
+		try{
 			
-		return answers;
-	}
-	
+			Connection conn = DBUtils.getConnection();
+			String sql = "{call spUpdateScore(?,?) }";
+			CallableStatement cs = conn.prepareCall(sql);
+
+			cs.setString(1, userName);
+			cs.setInt(2, score );
+			
+			cs.execute();
+			
+		}
+			catch (Exception e)
+	    {
+	      System.err.println("Got an exception! ");
+	      System.err.println(e.getMessage());
+	    }
+		
+	} 
+	public static void main(String args[]){
+		
+		GameDao gameDao = new GameDao();
+		gameDao.saveScore("xxsuperaquaman", 20);
+		
+	}	 
 }

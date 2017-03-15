@@ -8,6 +8,7 @@ public class UserDetails {
 	private String lastName;
 	private String userType;
 	private int questionaireLevel;
+	private int score;
 	
 	public int getId() {
 		return id;
@@ -44,5 +45,17 @@ public class UserDetails {
 	}
 	public void setQuestionaireLevel(int questionaireLevel) {
 		this.questionaireLevel = questionaireLevel;
+	}
+	/**
+	 * @return the score
+	 */
+	public int getScore() {
+		return score;
+	}
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(int score) {
+		this.score = score;
 	}
 }

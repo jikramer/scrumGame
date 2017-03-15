@@ -22,7 +22,7 @@
 	            
 	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
 	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
-	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 3" >Expert</td>
+	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
 	            
 	           </tr>
 	  		</tbody>

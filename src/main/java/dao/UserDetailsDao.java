@@ -15,7 +15,7 @@ public class UserDetailsDao {
 		UserDetails userDetails = new UserDetails();
 				
 		try{
-	      String query = "SELECT * FROM user_details d where id = (select id from user where userName = '" +  user.getUserName()  +  "')";
+	      String query = "SELECT d.*, q.level, q.score  FROM user_details d, user_questionaire_detail q  where d.id = q.id and d.id = (select id from user where userName = '" +  user.getUserName()  +  "')";
  
 	      Statement st = conn.createStatement();
 	      ResultSet rs = st.executeQuery(query);
@@ -27,9 +27,9 @@ public class UserDetailsDao {
 	        userDetails.setLastName(rs.getString("last_name"));
 	        userDetails.setUserType(rs.getString("user_type"));
 	        userDetails.setEmail(rs.getString("email"));
-	        userDetails.setQuestionaireLevel(rs.getInt("questionaire_level"));
+	        userDetails.setQuestionaireLevel(rs.getInt("level"));
+	        userDetails.setScore(rs.getInt("score"));
 	        
-	 	         
 	      }
 	      st.close();
 	    }
