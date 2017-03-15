@@ -23,19 +23,19 @@ public class GameHandler {
 	private int doSimpleScoring(Questionaire loadedQuestionaire ) {
 		int score = 0;
 		
-		if ( loadedQuestionaire.getAnswer1().equals("5"));
+		if ( loadedQuestionaire.getAnswer1().equals("5"))
 			score += 20;
 
-		if ( loadedQuestionaire.getAnswer2().equals("1"));
+		if ( loadedQuestionaire.getAnswer2().equals("1"))
 			score += 20;
 
-		if ( loadedQuestionaire.getAnswer3().equals("2"));
+		if ( loadedQuestionaire.getAnswer3().equals("2"))
 			score += 20;	
 		
-		if ( loadedQuestionaire.getAnswer4().equals("3"));
+		if ( loadedQuestionaire.getAnswer4().equals("3"))
 			score += 20;
 	
-		if ( loadedQuestionaire.getAnswer5().equals("4"));
+		if ( loadedQuestionaire.getAnswer5().equals("4"))
 			score += 20;
 		 
 		return score;
