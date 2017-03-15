@@ -12,18 +12,22 @@
 	        <thead>
 	          <tr>
 	             <th>User</th>
-	             <th>Password</th>
+	             <th>Questionaire Level</th>
 	           </tr>
 	        
 	        </thead>
 	        <tbody>
 	          <tr>
 	            <td th:text="${user.userName}">user name</td>
-	            <td th:text="${user.password}">user password</td>
+	            
+	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
+	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
+	            <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 3" >Expert</td>
+	            
 	           </tr>
 	  		</tbody>
 	      </table>
-	    <button type="submit" class="btn btn-default">Submit</button>
+	    <button type="submit" class="btn btn-default">Play</button>
 	  </form>
 	    </div>
 	 

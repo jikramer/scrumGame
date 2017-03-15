@@ -1,47 +1,43 @@
 package controller;
-
-import java.util.ArrayList;
+ 
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.Questionaire;
 
+@SessionAttributes( { "question_index", "something" })  
+
 @RestController
 public class DashboardController {
 
-  @PostMapping("/initplay")
+  @PostMapping("/initplay" )
   public ModelAndView get() { 
 	  
-	  ArrayList<Questionaire> questionList = doMockQuestionaireLoad();
-	  return new ModelAndView("game", "questionaires", questionList );
+	  Questionaire loadedQuestionaire = doMockQuestionaireLoad();
+	  return new ModelAndView("game", "Questionaire", loadedQuestionaire );
   }
   
-  private ArrayList<Questionaire> doMockQuestionaireLoad(){
+  private Questionaire doMockQuestionaireLoad(){
 	  
 	//TODO: initialize properly
-	  
-	  ArrayList<Questionaire> qList = new ArrayList<Questionaire>();
-	  
+	   
 	  Questionaire q1 = new Questionaire();
-	  Questionaire q2 = new Questionaire();
-	  Questionaire q3 = new Questionaire();
-	  Questionaire q4 = new Questionaire();
-	  Questionaire q5 = new Questionaire();
-
-	  q1.setQuestion("What's a standup meeting?");
-	  q2.setQuestion("How long is an agile sprint?");
-	  q3.setQuestion("What is XP?");
-	  q4.setQuestion("What's a work backlog?");
-	  q5.setQuestion("Is there such a thing as a scrum master?");
+	    
+	  q1.setQuestion1("What's a standup meeting?");
+	  q1.setQuestion2("How long is an agile sprint?");
+	  q1.setQuestion3("What is XP?");
+	  q1.setQuestion4("What's a work backlog?");
+	  q1.setQuestion5("Is there such a thing as a scrum master?");
 	  
-	  qList.add(q1);
-	  qList.add(q2);
-	  qList.add(q3);
-	  qList.add(q4);
-	  qList.add(q5);
+	  q1.setAnswer1("answer 1");
+	  q1.setAnswer2("answer 2");
+	  q1.setAnswer3("answer 3");
+	  q1.setAnswer4("answer 4");
+	  q1.setAnswer5("answer 5");
 	  
-	  return qList;
+	  return q1;
   }
 }

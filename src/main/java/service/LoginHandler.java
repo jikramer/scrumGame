@@ -6,11 +6,11 @@ import model.User;
 public class LoginHandler {
 
 
-	public boolean authenticateUser ( String userName, String password){
+	public boolean authenticateUser ( User incomingUser){
 		LoginDao loginDAO = new LoginDao();
-		User user = loginDAO.authenticateUser(userName, password);
+		User user = loginDAO.authenticateUser(incomingUser.getUserName(), incomingUser.getPassword());
 		
-	    boolean isValid = validatePassword(password, user.getPassword());
+	    boolean isValid = validatePassword(incomingUser.getPassword(), user.getPassword());
 		return isValid;
 	}
 	

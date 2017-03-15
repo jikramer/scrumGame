@@ -1,14 +1,15 @@
 package dao;
 
 import java.util.ArrayList;
+
+import model.Questionaire;
 //change
 public class GameDao {
 
-	public void saveAnswers(String[] answers){
+	public void saveAnswers(Questionaire loadedQuestionaire){
 		
-		for(int i=0; i < answers.length; i ++)
-			 System.out.println("saving answer to database:  " + answers[i]);
-	  
+		System.out.println(loadedQuestionaire.getAnswer1());
+		 
 	}
 
 	/**

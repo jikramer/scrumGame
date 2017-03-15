@@ -14,6 +14,9 @@ GO
 ALTER TABLE `scrumgame`.`user` 
 ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);
 
+ALTER TABLE `scrumgame`.`user_details` 
+ADD COLUMN `questionaire_level`;
+
 
 CREATE TABLE `scrumgame`.`user_details` (
   `id` INT NOT NULL,
@@ -48,4 +51,14 @@ END;$$
 DELIMITER ;
 
 call spCreateUser ("superman", "password");
+
+
+ALTER TABLE `scrumgame`.`user_details` 
+ADD COLUMN `questionaire_level` int;
+
+update scrumgame.user_details set questionaire_level = 1	
+
+
+insert into scrumgame.user_details values
+(1, "aqua", "man", "student", "aq@test.com", 1)
 

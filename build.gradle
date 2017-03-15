@@ -25,6 +25,17 @@ repositories {
 	mavenCentral()
 }
 
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'scrumGame': 'scrumGame',
+        	'Implementation-Version': '0.0.1-SNAPSHOT',
+        	'Main-Class': 'com.edu.ScrumApplication'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')

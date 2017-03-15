@@ -2,11 +2,12 @@ package model;
 
 public class UserDetails {
 
-	int id;
-	String email;
-	String firstName;
-	String lastName;
-	String userType;
+	private int id;
+	private String email;
+	private String firstName;
+	private String lastName;
+	private String userType;
+	private int questionaireLevel;
 	
 	public int getId() {
 		return id;
@@ -37,5 +38,11 @@ public class UserDetails {
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	public int getQuestionaireLevel() {
+		return questionaireLevel;
+	}
+	public void setQuestionaireLevel(int questionaireLevel) {
+		this.questionaireLevel = questionaireLevel;
 	}
 }
