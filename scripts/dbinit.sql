@@ -15,7 +15,7 @@ ALTER TABLE `scrumgame`.`user`
 ADD UNIQUE INDEX `username_UNIQUE` (`username` ASC);
 
 ALTER TABLE `scrumgame`.`user_details` 
-ADD COLUMN `questionaire_level`;
+ADD COLUMN `questionaire_level` int;
 
 
 CREATE TABLE `scrumgame`.`user_details` (
@@ -28,7 +28,7 @@ CREATE TABLE `scrumgame`.`user_details` (
 
 
 insert into user values
-(1, "aquaman", "password")
+(1, "aquaman", "password");
 
 
 
@@ -53,14 +53,14 @@ DELIMITER ;
 call spCreateUser ("superman", "password");
 
 
-ALTER TABLE `scrumgame`.`user_details` 
-ADD COLUMN `questionaire_level` int;
+/*ALTER TABLE `scrumgame`.`user_details` 
+ADD COLUMN `questionaire_level` int; */
 
-update scrumgame.user_details set questionaire_level = 1	
+update scrumgame.user_details set questionaire_level = 1;	
 
 
 insert into scrumgame.user_details values
-(1, "aqua", "man", "student", "aq@test.com", 1)
+(1, "aqua", "man", "student", "aq@test.com", 1);
 
 
 USE `scrumgame`
@@ -86,7 +86,8 @@ END;$$
 CREATE TABLE `scrumgame`.`user_questionaire_detail` (
   `id` INT NOT NULL,
   `level` INT NOT NULL,
-  `score` int NOT NULL);
+  `score` INT NOT NULL,
+  PRIMARY KEY (`id`));
 
 
 USE `scrumgame`;
