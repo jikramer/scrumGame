@@ -40,13 +40,14 @@
 	      <input type="text" th:field="*{userDetails.email}" class="form-control"  placeholder="Enter Email"></input>
 	    </div>
 	    
-	    <!-- TODO - switch to dropdown -->
-	    <div class="form-group">
-	      <label for="lblUserType"> UserType: </label>
-	      <input type="text" th:field="*{userDetails.userType}" class="form-control"  placeholder="Enter User Type ( Student / Faculty )"></input>
-	    </div>
-	    
-	    
+		<div class="form-group">
+		  <label for="lblUserType"> UserType: </label>
+		 	  <select class="form-control" th:field="*{userDetails.userType}" >	    
+			    <option th:value="1" th:text="Faculty" ></option>
+				<option th:value="2" th:text="Student" ></option>
+				</select>
+		
+		</div>
 	
 	
     <div class="form-group">

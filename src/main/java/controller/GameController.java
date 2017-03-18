@@ -51,7 +51,9 @@ public class GameController {
 		UserDetailsDao userDetailsDao = new UserDetailsDao();
 		UserDetails userDetails = userDetailsDao.getUserDetails(user);
 		
-		return new ModelAndView("score","UserDetails", userDetails );
+		user.setUserDetails(userDetails);
+		
+		return new ModelAndView("score","User", user );
 	
 	}
 }

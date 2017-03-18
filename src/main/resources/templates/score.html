@@ -7,7 +7,7 @@
     <div class="container">
       <h4>Score</h4>
        
-      <form action="#" th:action="@{/exit}" th:method="post">
+      <form action="#" th:action="@{/score}" th:method="post">
           <table class="table">
 	        <thead>
 	          <tr>
@@ -18,11 +18,10 @@
 	        </thead>
 	        <tbody>
 	          <tr>
-	       
-	            <td th:text="${UserDetails.firstName}"> </td>  
-	            <td th:text="${UserDetails.score}">score</td>
-	             
+	            <td th:text="${User.userName}"> </td>  
+	            <td th:text="${User.UserDetails.score}">score</td>
 	           </tr>
+	  		
 	  		</tbody>
 	      </table>
 	    <button type="submit" class="btn btn-default">Submit</button>
