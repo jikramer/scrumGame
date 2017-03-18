@@ -50,7 +50,7 @@ public class GameController {
 		
 		UserDetailsDao userDetailsDao = new UserDetailsDao();
 		UserDetails userDetails = userDetailsDao.getUserDetails(user);
-		
+		System.out.println("");
 		user.setUserDetails(userDetails);
 		
 		return new ModelAndView("score","User", user );

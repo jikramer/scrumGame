@@ -15,14 +15,14 @@ public class QuestionaireDao {
 		UserDetails userDetails = new UserDetails();
 				
 		try{
-	      String query = "SELECT questionaire_level FROM user_details where username = '" +  user.getUserName()  + "'";
+	      String query = "SELECT d.level FROM user_questionaire_detail d, user u where d.id = u.id and  u.username = '" +  user.getUserName()  + "'";
  
 	      Statement st = conn.createStatement();
 	      ResultSet rs = st.executeQuery(query);
 	      
 	      while (rs.next())
 	      {
-	        userDetails.setQuestionaireLevel(rs.getInt("questionaire_level")); 
+	        userDetails.setQuestionaireLevel(rs.getInt("level")); 
 	      }
 	      st.close();
 	    }

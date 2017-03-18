@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.User;
+import model.UserDetails;
 import service.LoginHandler;
 import service.QuestionaireHandler;
 import service.UserDetailsHandler;
@@ -42,7 +43,13 @@ public class LoginController {
 	    }
 	    else{	
 	    	UserDetailsHandler userDetailsHandler = new UserDetailsHandler();
-	    	login.setUserDetails(userDetailsHandler.getUserDetails(login));
+	    	UserDetails userDetails = userDetailsHandler.getUserDetails(login);
+	    	login.setUserDetails(userDetails);
+	    	
+	    	QuestionaireHandler questionaireHandler = new QuestionaireHandler();
+	    	int levelCompleted = questionaireHandler.getQuestionaireLevelCompleted(login);
+	    	userDetails.setQuestionaireLevel(levelCompleted);
+	    	
 	    	return new ModelAndView("dashboard", "user", login );
 	    }	
 	 }

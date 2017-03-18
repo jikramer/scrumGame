@@ -6,15 +6,14 @@ import model.User;
 public class QuestionaireHandler {
 
 
-	public String getQuestionaireLevelCompleted ( User user){
+	public int getQuestionaireLevelCompleted ( User user){
 	
 		QuestionaireDao questionaireDao = new QuestionaireDao();
 		int level = questionaireDao.getQuestionaireLevel(user);
-		String prettyLevel = getPrettyQuestionaireLevel(level);
-		return prettyLevel;
+		return level;
 	}
 	
-	private String getPrettyQuestionaireLevel(int level){
+	public String getPrettyQuestionaireLevel(int level){
 		
 		switch(level){
 			case 1:
