@@ -35,6 +35,9 @@ CREATE TABLE `scrumgame`.`user_questionaire_detail` (
   `score` INT NOT NULL,
   PRIMARY KEY (`id`));
 
+ CREATE TABLE `scrumgame`.`facultystudent` (
+  `facultyId` INT NULL,
+  `studentid` INT NULL);
  
 ######
 #procs
@@ -94,6 +97,62 @@ END$$
 DELIMITER ;
 
 
+USE `scrumgame`;
+DROP procedure IF EXISTS `spGetFacultyStudent`;
+
+DELIMITER $$
+USE `scrumgame`$$
+CREATE PROCEDURE `spGetFacultyStudent` (incomingUserName varchar(45))
+BEGIN
+
+
+	SELECT  u.username, q.level, q.score 
+	FROM user u, 
+	user_questionaire_detail q,
+	facultystudent s 
+	where u.id = q.id 
+	and u.id =s.studentid
+	and s.facultyid = (select id from user where userName = incomingUserName);
+
+
+END$$
+
+DELIMITER ;
+
+
+
+USE `scrumgame`;
+DROP procedure IF EXISTS `spAssignFacultyStudent`;
+
+DELIMITER $$
+USE `scrumgame`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spAssignFacultyStudent`(incomingFacultyName varchar(45), incomingStudentName varchar(45))
+BEGIN
+declare facId int;
+declare stuId int;
+declare stuCount int;
+  
+select id into stuId from user where username = incomingStudentName;
+select id into facId from user where username = incomingFacultyName;
+
+select count(studentId) into stuCount from facultystudent where stuId = studentId;
+
+if (stuCount > 0 ) then
+	update facultystudent 
+    set facultyId = facId
+    where studentid = stuId;
+else
+
+	insert into facultystudent values(facId,stuId);
+
+end if;
+
+
+END$$
+
+DELIMITER ;
+
+
 
 # seed tables;
 
@@ -102,6 +161,7 @@ insert into user values
  
 #update scrumgame.user_details set questionaire_level = 1;	
 
+insert into facultystudent values(1,0)
 
 
 

@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.FacultyStudent;
 import model.User;
 import model.UserDetails;
 import service.RegistrationHandler;
+import utils.Constants;
  
 @Controller
 @ResponseBody
@@ -34,9 +39,19 @@ public class RegistrationController {
 		 RegistrationHandler handler = new RegistrationHandler();
 		 handler.createUser(login);
 		 	
-		 UserDetails userDetails = new UserDetails();
-		 userDetails.setQuestionaireLevel(1);
+		 UserDetails userDetails = login.getUserDetails();
 		 
+		 if(userDetails.getUserType().equals(String.valueOf(Constants.FACULTY.value()))){
+			  //list of new faculty's users will always be empty
+			List<User> users = new ArrayList<User>();
+			    
+			ModelAndView mv = new ModelAndView("facultyDashboard", "users", users );
+			mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
+			
+			return mv;
+		 }
+	 
+		 userDetails.setQuestionaireLevel(Constants.BEGINNER.value());
 		 login.setUserDetails(userDetails);
 		 return new ModelAndView("dashboard", "user", login );
 	 }

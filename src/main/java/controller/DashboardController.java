@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.FacultyStudent;
 import model.Questionaire;
+import model.User;
+import service.UserDetailsHandler;
 
 @SessionAttributes( { "question_index", "something" })  
 
@@ -20,6 +23,20 @@ public class DashboardController {
 	  return new ModelAndView("game", "Questionaire", loadedQuestionaire );
   }
   
+  @PostMapping("/done" )
+  public ModelAndView done() { 
+	  return new ModelAndView("done", "done", new User());
+  }
+  
+
+  @PostMapping("/assign" )
+  public ModelAndView assign(FacultyStudent facultyStudent) { 
+	   
+	  UserDetailsHandler userDetailsHandler = new UserDetailsHandler();
+	  userDetailsHandler.assignFacultyStudent(facultyStudent);
+	   
+	  return new ModelAndView("done", "done", new User());
+  }
   
   private Questionaire doMockQuestionaireLoad(){
 	  

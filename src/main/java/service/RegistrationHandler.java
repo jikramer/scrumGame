@@ -9,6 +9,4 @@ public class RegistrationHandler {
 		RegistrationDao registrationDao = new RegistrationDao();
 		registrationDao.createUserWithDetails(user);
 	}
-	 
-	
 }
