@@ -62,7 +62,7 @@ public class LoginController {
 	    	//user is a faculty member, prep & show faculty dashboard
 	    	if(login.getUserDetails().getUserType().equals(String.valueOf(Constants.FACULTY.value()))){
 	    		ArrayList<User> users = (ArrayList<User>) getStudentFacultyDetails(login);
-	    		 
+	    		httpSession.setAttribute("login", login);
 	    		ModelAndView mv = new ModelAndView("facultyDashboard", "users", users);
 	    		mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
 	    		return mv;

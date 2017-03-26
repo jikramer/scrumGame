@@ -1,6 +1,11 @@
 package controller;
  
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -13,9 +18,14 @@ import service.UserDetailsHandler;
 
 @SessionAttributes( { "question_index", "something" })  
 
+
+
 @RestController
 public class DashboardController {
+  @Autowired
+  private HttpSession httpSession;
 
+	
   @PostMapping("/initplay" )
   public ModelAndView get() { 
 	  
@@ -34,9 +44,15 @@ public class DashboardController {
 	   
 	  UserDetailsHandler userDetailsHandler = new UserDetailsHandler();
 	  userDetailsHandler.assignFacultyStudent(facultyStudent);
-	   
-	  return new ModelAndView("done", "done", new User());
-  }
+	  
+	  User login = (User) httpSession.getAttribute("login");
+	  UserDetailsHandler handler = new UserDetailsHandler();
+	  List<User> users = handler.getFacultyStudentDetails(login);
+  	  
+	  ModelAndView mv = new ModelAndView("facultyDashboard", "users", users);
+	  mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
+      return mv;
+   }
   
   private Questionaire doMockQuestionaireLoad(){
 	  
