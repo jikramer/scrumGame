@@ -165,3 +165,5 @@ insert into facultystudent values(1,0)
 
 
 
+ALTER TABLE `scrumgame`.`user_questionaire_detail` 
+ADD COLUMN `last_update_dt` VARCHAR(45) NULL AFTER `score`;

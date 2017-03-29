@@ -11,6 +11,11 @@ public class User {
 	private boolean hasErrors;
 	private String loginErrorMessage = "Invalid userId or password, please try again or register";
 	
+	
+	public User(){
+		userDetails = new UserDetails();
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

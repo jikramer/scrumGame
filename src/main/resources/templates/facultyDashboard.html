@@ -43,7 +43,12 @@
 			            
 	     		<tr th:each="user : ${users}">   
 	       			<td th:text="${user.userName}" > </td>
-	       			<td th:text="${user.userDetails.questionaireLevel}" > </td>
+	       		
+	       			
+	       			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
+	     			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
+	            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
+	     
 	       			<td th:text="${user.userDetails.score}" > </td>
 	         	</tr>	
 	           
