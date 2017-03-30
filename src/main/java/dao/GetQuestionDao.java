@@ -1,9 +1,10 @@
+package dao;
 import java.sql.*;
 import model.User;
 import model.UserDetails;
 import utils.DBUtils;
 
-public class getQuestion {
+public class GetQuestionDao {
 public void getMCQ(User user){
 		
 		Connection conn = DBUtils.getConnection();
@@ -73,7 +74,7 @@ public void getMCQ(User user){
 	}
 		
 	public static void main(String args[]){
-		getQuestion q = new getQuestion();
+		GetQuestionDao q = new GetQuestionDao();
 		User user = new User();
 		user.setId(2);
 		UserDetails d = new UserDetails();

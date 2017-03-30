@@ -161,7 +161,7 @@ insert into user values
  
 #update scrumgame.user_details set questionaire_level = 1;	
 
-insert into facultystudent values(1,0)
+insert into facultystudent values(1,0);
 
 
 
