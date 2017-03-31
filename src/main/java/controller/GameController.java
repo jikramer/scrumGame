@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.LoginDao;
 import dao.UserDetailsDao;
 import model.Questionaire;
 import model.User;
@@ -27,33 +26,59 @@ public class GameController {
 
     @Autowired
     private HttpSession httpSession; 
-	
+    private Questionaire originalQuestionaire; 
+    private Questionaire answeredQuestionaire = new Questionaire();
+    
  	 @GetMapping("/show")
 	    public ModelAndView greetingForm(Model model) {
 	      return new ModelAndView("game", "questionaire", new Questionaire());
 	 }	 
 	 
-
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+ 	//show 1 question at a time
+  	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView save( @ModelAttribute(value="Questionaire") Questionaire questionaire ) {        
-		String userName = httpSession.getAttribute("userName").toString();
 		
-		System.out.println("userName from session: " + userName);
-		
-		GameHandler gameHandler = new GameHandler();
+		originalQuestionaire  = (Questionaire) httpSession.getAttribute("questionaire");
+		int currentQuestionNum = originalQuestionaire.getCurrentQuestion();
+		if (currentQuestionNum <= 5){
+			
+			if ( currentQuestionNum ==1)
+				answeredQuestionaire.setAnswer1(questionaire.getAnswer1());
+			else if ( currentQuestionNum ==2)
+				answeredQuestionaire.setAnswer2(questionaire.getAnswer2());
+			else if ( currentQuestionNum ==3)
+				answeredQuestionaire.setAnswer3(questionaire.getAnswer3());
+			else if ( currentQuestionNum ==4)
+				answeredQuestionaire.setAnswer4(questionaire.getAnswer4());
+			else if ( currentQuestionNum ==5)
+				answeredQuestionaire.setAnswer5(questionaire.getAnswer5());
+ 
+			originalQuestionaire.setCurrentQuestion(currentQuestionNum + 1);
+			httpSession.setAttribute("questionaire", originalQuestionaire);
+			 
+			return new ModelAndView("game", "Questionaire", originalQuestionaire );
+ 		}
+		ModelAndView results = scoreAndRedirect();
+		return results;
+	}
+
+	private ModelAndView scoreAndRedirect(){
 	
-		int score = gameHandler.scoreGame(userName, questionaire);
-		
-		gameHandler.save(userName, score);
-		User user = new User();
+		String userName = httpSession.getAttribute("userName").toString();
+ 	 	
+		GameHandler gameHandler = new GameHandler();
+	 	int score = gameHandler.scoreGame(userName, answeredQuestionaire);
+	 	gameHandler.save(userName, score);
+	
+	 	User user = new User();
 		user.setUserName(userName);
-		
-		UserDetailsDao userDetailsDao = new UserDetailsDao();
+	 	UserDetailsDao userDetailsDao = new UserDetailsDao();
 		UserDetails userDetails = userDetailsDao.getUserDetails(user);
-		System.out.println("");
-		user.setUserDetails(userDetails);
+	 	user.setUserDetails(userDetails);
 		
 		return new ModelAndView("score","User", user );
-	
+		
 	}
+	
+
 }

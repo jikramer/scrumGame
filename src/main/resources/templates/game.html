@@ -12,23 +12,29 @@
  
       <form action="#" th:action="@{/save}" th:object="${Questionaire}" method="post">
             
-		
-		<div class="form-group">
- 				  <label for="sel1" th:text="${Questionaire.question1}" ></label>
-			 	  <select class="form-control" th:field="*{answer1}" > 
-				    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
-				    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
-				    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
-				    <option th:value="4" th:text="${Questionaire.answer4}" ></option>
-				    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
-		
-			 	  </select>
+		<div th:if="${Questionaire.currentQuestion} == 1">
+			<div class="form-group">
+			
+	 				  <label for="sel1" th:text="${Questionaire.question1}" ></label>
+				 	  <select class="form-control" th:field="*{answer1}" > 
+					    <option th:value="0">--Please Select--</option>
+					    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
+					    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
+					    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
+					    <option th:value="4" th:text="${Questionaire.answer4}" ></option>
+					    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
+			
+				 	  </select>
+				</div>
 			</div>
-
+			
+		<div th:if="${Questionaire.currentQuestion} == 2">
+		
 			<div class="form-group">
 			
 			  <label for="sel2" th:text="${Questionaire.question2}" ></label>
 		 	  <select class="form-control" th:field="*{answer2}" >
+				    <option th:value="0">--Please Select--</option>
 				    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
 				    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
 				    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
@@ -36,10 +42,13 @@
 				    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
 		 	  </select>
 			</div>
+		</div>
+		<div th:if="${Questionaire.currentQuestion} == 3">
+		
 			<div class="form-group">
 				  <label for="sel3" th:text="${Questionaire.question3}" ></label>
 			 	  <select class="form-control" th:field="*{answer3}" > 
-		
+					<option th:value="0">--Please Select--</option>
 		 		    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
 				    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
 				    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
@@ -47,30 +56,35 @@
 				    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
 			 	  </select>
 			</div>
+		</div>
+		<div th:if="${Questionaire.currentQuestion} == 4">
 			<div class="form-group">
 						
 				  <label for="sel4" th:text="${Questionaire.question4}" ></label>
 			 	  <select class="form-control" th:field="*{answer4}" >	    
-			    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
+			    	<option th:value="0">--Please Select--</option>
+			    	<option th:value="1" th:text="${Questionaire.answer1}" ></option>
 				    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
 				    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
 				    <option th:value="4" th:text="${Questionaire.answer4}" ></option>
 				    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
 			 	  </select>
 			</div>
+		</div>
+		<div th:if="${Questionaire.currentQuestion} == 5">
 			<div class="form-group">
 						
 				  <label for="sel5" th:text="${Questionaire.question5}" ></label>
 			 	  <select class="form-control" th:field="*{answer5}" >	    
-			    <option th:value="1" th:text="${Questionaire.answer1}" ></option>
+			    	<option th:value="0">--Please Select--</option>
+			    	<option th:value="1" th:text="${Questionaire.answer1}" ></option>
 				    <option th:value="2" th:text="${Questionaire.answer2}" ></option>
 				    <option th:value="3" th:text="${Questionaire.answer3}" ></option>
 				    <option th:value="4" th:text="${Questionaire.answer4}" ></option>
 				    <option th:value="5" th:text="${Questionaire.answer5}" ></option>
 			 	  </select>
-			
 			</div>
-       		   
+       	 </div>	   
 	  		 
 	    <button type="submit" class="btn btn-default">Save</button>
 	  </form>

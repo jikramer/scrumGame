@@ -28,8 +28,8 @@ public class DashboardController {
 	
   @PostMapping("/initplay" )
   public ModelAndView get() { 
-	  
 	  Questionaire loadedQuestionaire = doMockQuestionaireLoad();
+	  httpSession.setAttribute("questionaire", loadedQuestionaire);
 	  return new ModelAndView("game", "Questionaire", loadedQuestionaire );
   }
   
@@ -66,6 +66,7 @@ public class DashboardController {
 	  q1.setQuestion4("What's a work backlog?");
 	  q1.setQuestion5("Is there such a thing as a scrum master?");
 	  
+	  q1.setAnswer1("answer 1");
 	  q1.setAnswer1("answer 1");
 	  q1.setAnswer2("answer 2");
 	  q1.setAnswer3("answer 3");

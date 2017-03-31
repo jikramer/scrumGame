@@ -25,9 +25,7 @@
 			</div>
         </form>
       
-      <br></br>
-      <br></br>
-       <br></br> 
+        <br></br> 
       <form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
        	<div class="form-group">
 	       	<h4 class="text-center">Current Student Results: </h4>	
@@ -37,6 +35,7 @@
 			        <th>Student</th>
 			        <th>Level</th>	
 			        <th>Score</th>
+			        <th>Timestamp</th>
 			   </tr>
 			 </thead>
 			 <tbody>     
@@ -59,6 +58,45 @@
 	 	
 	 	</div>		
      </form>
-     </div>
+
+	<div class="container">
+			<form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
+       	<div class="form-group">
+	       	<h4 class="text-center">Student Historical Results: </h4>	
+			<table class="table">
+			<thead>
+			    <tr>
+			        <th>Student</th>
+			        <th>Level</th>
+			        	<th>Score</th>
+			        <th>Timestamp</th>
+			   </tr>
+			 </thead>
+			 <tbody>     
+			            
+	     		<tr th:each="user : ${historicalUsers}">   
+	       			<td th:text="${user.userName}" > </td>
+	       		
+	       			
+	       			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
+	     			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
+	            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
+	     
+	       			<td th:text="${user.userDetails.score}" > </td>
+	       			<td th:text="${user.userDetails.timestamp}" > </td>
+	       
+	         	</tr>	
+	           
+	 		</tbody>
+	        </table> 
+	        
+	         <button type="submit" class="btn btn-default">Exit</button>
+	 	
+	 	</div>		
+     </form>
+			
+	</div>
+	
+      </div>
      </body>
 	</html>

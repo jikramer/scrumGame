@@ -19,7 +19,10 @@ public class UserDetailsDao {
 		UserDetails userDetails = new UserDetails();
 				
 		try{
-	      String query = "SELECT d.*, q.level, q.score  FROM user_details d, user_questionaire_detail q  where d.id = q.id and d.id = (select id from user where userName = '" +  user.getUserName()  +  "')";
+	      String query = "SELECT d.*, q.level, q.score  FROM user_details d, user_questionaire_detail q  "
+	      		+ "where d.id = q.id "
+	      		+ "and q.last_update_dt = (select max(last_update_dt) from user_questionaire_detail where id = (select id from user where userName = '" +  user.getUserName()  +  "')"
+	        	+ "and d.id = (select id from user where userName = '" +  user.getUserName()  +  "'))";
  
 	      Statement st = conn.createStatement();
 	      ResultSet rs = st.executeQuery(query);
@@ -79,6 +82,46 @@ public class UserDetailsDao {
 		    }
 			return users;
 	} 
+
+	
+
+	public List<User> getFacultyStudentHistory(User user){
+		
+		List<User> users = new ArrayList<User>();
+		
+		try{
+			
+			Connection conn = DBUtils.getConnection();
+			String sql = "{call spGetFacultyStudentHistory(?) }";
+			CallableStatement cs = conn.prepareCall(sql);
+
+			cs.setString(1, user.getUserName());
+			ResultSet rs = cs.executeQuery();
+	       
+			while (rs.next())
+		      {
+		        User u = new User();
+		        UserDetails d = new UserDetails();
+		        
+		        u.setUserName(rs.getString("username"));
+				d.setQuestionaireLevel(rs.getInt("level"));
+				d.setScore(rs.getInt("score"));
+				d.setTimestamp(rs.getString("last_update_dt"));
+				
+				u.setUserDetails(d);
+				users.add(u);
+		      }
+	 	    }
+		    catch (Exception e)
+		    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		    }
+			return users;
+	} 
+
+	
+	
 	
 	public void assignFacultyStudent(FacultyStudent facultyStudent){
 		try{
@@ -100,6 +143,46 @@ public class UserDetailsDao {
 	    }
  
 }
+	
+
+
+	public List<User> getStudentHistory(User user){
+		
+ 		List<User> users = new ArrayList<User>();
+		
+		try{
+			
+			Connection conn = DBUtils.getConnection();
+			String sql = "{call spGetStudentHistory(?) }";
+			CallableStatement cs = conn.prepareCall(sql);
+
+			cs.setString(1, user.getUserName()); 
+			ResultSet rs = cs.executeQuery();
+		
+			while (rs.next())
+		      {
+		        User u = new User();
+		        UserDetails d = new UserDetails();
+		        
+		        u.setUserName(rs.getString("username"));
+				d.setQuestionaireLevel(rs.getInt("level"));
+				d.setScore(rs.getInt("score"));
+				d.setTimestamp(rs.getString("last_update_dt"));
+				u.setUserDetails(d);
+				
+				users.add(u);
+		      }
+  			
+			
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("Got an exception! ");
+	      System.err.println(e.getMessage());
+	    }
+		return users;
+	}
+
 	
 	
 	/**

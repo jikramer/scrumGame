@@ -9,6 +9,7 @@ public class UserDetails {
 	private String userType;
 	private int questionaireLevel;
 	private int score;
+	private String timestamp;
 	
 	public int getId() {
 		return id;
@@ -57,5 +58,17 @@ public class UserDetails {
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+	/**
+	 * @return the timestamp
+	 */
+	public String getTimestamp() {
+		return timestamp;
+	}
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 }

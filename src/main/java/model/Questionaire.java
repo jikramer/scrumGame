@@ -18,6 +18,8 @@ public class Questionaire implements Serializable {
 	private String answer4;
 	private String answer5;
 
+	private int currentQuestion = 1;
+	
 	public String getQuestion1() {
 		return question1;
 	}
@@ -77,6 +79,18 @@ public class Questionaire implements Serializable {
 	}
 	public void setAnswer5(String answer5) {
 		this.answer5 = answer5;
+	}
+	/**
+	 * @return the currentQuestion
+	 */
+	public int getCurrentQuestion() {
+		return currentQuestion;
+	}
+	/**
+	 * @param currentQuestion the currentQuestion to set
+	 */
+	public void setCurrentQuestion(int currentQuestion) {
+		this.currentQuestion = currentQuestion;
 	}
 	
 }

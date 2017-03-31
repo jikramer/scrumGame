@@ -25,4 +25,18 @@ public class UserDetailsHandler {
  		UserDetailsDao userDetailsDao = new UserDetailsDao();
  		userDetailsDao.assignFacultyStudent(facultyStudent);
  	}
+
+ 	public List<User> getStudentHistory(User user){
+ 		UserDetailsDao userDetailsDao = new UserDetailsDao();
+ 		List<User> users = userDetailsDao.getStudentHistory(user);
+ 		return users;
+ 	}
+
+ 	public List<User> getFacultyStudentHistory(User user){
+ 		UserDetailsDao userDetailsDao = new UserDetailsDao();
+ 		List<User> users = userDetailsDao.getFacultyStudentHistory(user);
+ 		return users;
+ 	}
+ 	
+ 	
 }
