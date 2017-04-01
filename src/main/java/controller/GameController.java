@@ -40,7 +40,7 @@ public class GameController {
 		
 		originalQuestionaire  = (Questionaire) httpSession.getAttribute("questionaire");
 		int currentQuestionNum = originalQuestionaire.getCurrentQuestion();
-		if (currentQuestionNum <= 5){
+		if (currentQuestionNum <= 4){
 			
 			if ( currentQuestionNum ==1)
 				answeredQuestionaire.setAnswer1(questionaire.getAnswer1());
@@ -50,9 +50,7 @@ public class GameController {
 				answeredQuestionaire.setAnswer3(questionaire.getAnswer3());
 			else if ( currentQuestionNum ==4)
 				answeredQuestionaire.setAnswer4(questionaire.getAnswer4());
-			else if ( currentQuestionNum ==5)
-				answeredQuestionaire.setAnswer5(questionaire.getAnswer5());
- 
+  
 			originalQuestionaire.setCurrentQuestion(currentQuestionNum + 1);
 			httpSession.setAttribute("questionaire", originalQuestionaire);
 			 

@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.FacultyStudent;
 import model.User;
-import model.UserDetails;
 import service.LoginHandler;
 import service.QuestionaireHandler;
 import service.UserDetailsHandler;
@@ -64,28 +63,21 @@ public class LoginController {
 	    		ArrayList<User> users = (ArrayList<User>) getStudentFacultyDetails(login);
 	    		httpSession.setAttribute("login", login);
 	    		ModelAndView mv = new ModelAndView("facultyDashboard", "users", users);
-	    		
 	    		FacultyStudent fs = new FacultyStudent();
 	    		ArrayList<User> historicalUsers = (ArrayList<User>) userDetailsHandler.getFacultyStudentHistory(login);
-	    		
 	    		mv.getModelMap().addAttribute("FacultyStudent", fs);
- 
-	    		mv.getModelMap().addAttribute("historicalUsers", historicalUsers);
-	    		 
-	    		return mv;
+  	    		mv.getModelMap().addAttribute("historicalUsers", historicalUsers);
+	     		return mv;
 	    	}	
 	    	//user is a student, prep & show student dashboard
 	    	else{
 	    		login = getStudentDashboardDetails(login);
 	    		List<User>users = getStudentHistoryDetails( login);
-	     	    
-	    		ModelAndView mv = new ModelAndView("dashboard", "user", login );
+ 	    		ModelAndView mv = new ModelAndView("dashboard", "user", login );
  	    		mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
 	     		mv.getModelMap().addAttribute("users", users);
-
-	     		return mv;
-
-	     	}
+ 	     		return mv;
+ 	     	}
  	 }
 	 
 	 

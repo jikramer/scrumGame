@@ -21,9 +21,9 @@ public class GameHandler {
 	 * @return
 	 */
 	private int doSimpleScoring(Questionaire loadedQuestionaire ) {
-		int score = 0;
+		int score = 20;
 		
-		if ( loadedQuestionaire.getAnswer1().equals("5"))
+		if ( loadedQuestionaire.getAnswer1().equals("4"))
 			score += 20;
 
 		if ( loadedQuestionaire.getAnswer2().equals("1"))
@@ -34,10 +34,8 @@ public class GameHandler {
 		
 		if ( loadedQuestionaire.getAnswer4().equals("3"))
 			score += 20;
+	 	 
 	
-		if ( loadedQuestionaire.getAnswer5().equals("4"))
-			score += 20;
-		 
 		return score;
 		
 	}

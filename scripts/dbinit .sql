@@ -48,10 +48,13 @@ Answer varchar(1) #,
 );
 
 
- 
 create table scrumgame.MultipleChoiceQuestion(
 Question_ID int auto_increment,
-Question varchar(1000),
+Question_1 varchar(1000),
+Question_2 varchar(1000),
+Question_3 varchar(1000),
+Question_4 varchar(1000),
+
 choice_1 varchar(500),
 choice_2 varchar(500),
 choice_3 varchar(500),
@@ -133,14 +136,13 @@ BEGIN
 	DROP table IF EXISTS `scrumgame`.`tmp`;
 
      CREATE TABLE `scrumgame`.`tmp` (
-  `id` INT NOT NULL);
+    `id` INT NOT NULL);
  
     
     insert into scrumgame.tmp  
 	(select studentId from facultystudent s where s.facultyid =  (select id from user where userName = incomingUserName));
     
-      
- 
+     
 	SELECT  u.id, u.username, q.level, q.score,  q.last_update_dt
 	FROM user u, 
 	user_questionaire_detail q,
@@ -148,14 +150,13 @@ BEGIN
 	where u.id = q.id 
 	and u.id =s.studentid
 	and s.facultyid = (select id from user where userName = incomingUserName)
-	
-
+ 
 	and q.last_update_dt in  (  select last_update_dt from user_questionaire_detail u, tmp t 
                                where u.id = t.id 
                                and u.last_update_dt = (select max(last_update_dt) 
-                               from user_questionaire_detail where id = t.id));
- 
-
+                               from user_questionaire_detail where id = t.id))
+ 	
+	order by username desc;
 END$$
 
 DELIMITER ;
@@ -251,7 +252,7 @@ DROP procedure IF EXISTS `getQuestion`;
 Create procedure getQuestion(
 IN levels varchar(30))
 begin
-(Select Question,choice_1,choice_2,choice_3,choice_4 from scrumgame.MultipleChoiceQuestion where Question_type = levels);
+(Select Question_1,Question_2,Question_3,Question_4,choice_1,choice_2,choice_3,choice_4 from scrumgame.MultipleChoiceQuestion where Question_type = levels);
  END$$
 DELIMITER ;
 
@@ -265,11 +266,11 @@ insert into facultystudent values(1,0);
  
 # Q&A
 
-insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("Where are the customer requirements stored?","In the Product Backlog","In the Sprint Backlog","In a database","In a Scrum Product Requirement Specification","Beginner");
-insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("Which concept is NOT defined in the Scrum Framework?","Scrum Master","Project Manager","Scrum Product Owner","Scrum Product Burndown","Beginner");
-Insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type)  values ("What kind of software development projects can be executed by Scrum Project Management Framework?","Complete software packages","Customer projects","Sub-systems, components or parts of bigger systems","All kinds of software development projects","Intermediate");
-Insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("What does NOT belong to cornerstones of the agile manifesto?","Individuals and interactions over processes and tools","Working software over comprehensive documentation","Processes over people","Responding to change over following a plan","Intermediate");
-Insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("What are the advantages of the Scrum Framework?","Fine-grained requirements are only defined when they are really needed.","All activities to design, build and test a certain functionality are kept together in one phase.","Changes are expected and welcomed by Scrum team.","All of the given answers","Expert");
+insert into scrumgame.MultipleChoiceQuestion (Question_1, Question_2, Question_3, Question_4,choice_1,choice_2,choice_3,choice_4,Question_type) values ("q1", "q2", "q3", "Where are the customer requirements stored?","In the Product Backlog","In the Sprint Backlog","In a database","In a Scrum Product Requirement Specification","Beginner");
+#insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("Which concept is NOT defined in the Scrum Framework?","Scrum Master","Project Manager","Scrum Product Owner","Scrum Product Burndown","Beginner");
+Insert into scrumgame.MultipleChoiceQuestion (Question_1, Question_2, Question_3, Question_4,choice_1,choice_2,choice_3,choice_4,Question_type)  values ("q1", "q2", "q3", "What kind of software development projects can be executed by Scrum Project Management Framework?","Complete software packages","Customer projects","Sub-systems, components or parts of bigger systems","All kinds of software development projects","Intermediate");
+#Insert into scrumgame.MultipleChoiceQuestion (Question,choice_1,choice_2,choice_3,choice_4,Question_type) values ("What does NOT belong to cornerstones of the agile manifesto?","Individuals and interactions over processes and tools","Working software over comprehensive documentation","Processes over people","Responding to change over following a plan","Intermediate");
+Insert into scrumgame.MultipleChoiceQuestion (Question_1, Question_2, Question_3, Question_4,choice_1,choice_2,choice_3,choice_4,Question_type) values ("q1", "q2", "q3", "What are the advantages of the Scrum Framework?","Fine-grained requirements are only defined when they are really needed.","All activities to design, build and test a certain functionality are kept together in one phase.","Changes are expected and welcomed by Scrum team.","All of the given answers","Expert");
 
  
 Insert into scrumgame.QandA values(1,'A');
@@ -277,10 +278,7 @@ Insert into scrumgame.QandA values(2,'B');
 Insert into scrumgame.QandA values(3,'D');
 Insert into scrumgame.QandA values(4,'C');
 Insert into scrumgame.QandA values(5,'D');
-Insert into scrumgame.QandA values(5,'D');
+ 
 
-
-
-
-
+Call getQuestion('Beginner')
 

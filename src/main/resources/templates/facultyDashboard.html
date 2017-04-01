@@ -6,96 +6,97 @@
   <body>
     <div class="container">
       <h2 class="text-left">ScrumGame Faculty Dashboard</h2>
+
+		 <form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
+	       	<div class="form-group">
+		       	<h4 class="text-center">Current Student Results: </h4>	
+				<table class="table table-striped table-bordered">
+				<thead>
+				    <tr>
+				        <th>Student</th>
+				        <th>Level</th>	
+				        <th>Score</th>
+			 	   </tr>
+				 </thead>
+				 <tbody>     
+				            
+		     		<tr th:each="user : ${users}">   
+		       			<td th:text="${user.userName}" > </td>
+		        			
+		       			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
+		     			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
+		            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
+		     
+		       			<td th:text="${user.userDetails.score}" > </td>
+		         	</tr>	
+		           
+		 		</tbody>
+		        </table> 
+		        
+		         <button type="submit" class="btn btn-default">Exit</button>
+		 	</div>
+ 	     </form>
+			
   	    
        <form class="form-horizontal" action="#" th:object="${FacultyStudent}" th:action="@{/assign}" th:method="post" >
 	    <div class = "form-group">
 	       <h4 class="text-center">Student-Faculty assignment tool</h4>
-	       	    <div class="form-group">
-			      <label for="lblFacultyName">Faculty Member: </label>
-			      <input type="text" class="form-control" th:field="*{faculty}" placeholder="Enter faculty member"></input>
-			    </div>
-			    <div class="form-group">
-			      <label for="student">Student:</label>
-			      <input type="text" class="form-control" th:field="*{student}" placeholder="Enter student"></input>
-			    </div>
-			  
-			    <div class="form-group">
-			    	<button type="submit" class="btn btn-default">OK</button>
-				</div>
-			</div>
+	       	   	    <div class="form-group">
+				 		<div class="col-xs-3">
+		    	      		<label for="lblFacultyName">Faculty Member: </label>
+				      		<input type="text" class="form-control" th:field="*{faculty}" placeholder="Enter faculty member"></input>
+				    	</div>
+				  	</div>
+			     <div class="form-group">
+				 		<div class="col-xs-3">
+			   
+					      <label for="student">Student:</label>
+					      <input type="text" class="form-control" th:field="*{student}" placeholder="Enter student"></input>
+						    <div class="form-group">
+					    <div class="col-xs-3">
+			   				
+					    		<button type="submit" class="btn btn-default">OK</button>
+						</div>
+						</div>
+	 			    </div>
+			  	 </div>
+ 				</div>
         </form>
       
-        <br></br> 
-      <form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
-       	<div class="form-group">
-	       	<h4 class="text-center">Current Student Results: </h4>	
-			<table class="table">
-			<thead>
-			    <tr>
-			        <th>Student</th>
-			        <th>Level</th>	
-			        <th>Score</th>
-			        <th>Timestamp</th>
-			   </tr>
-			 </thead>
-			 <tbody>     
-			            
-	     		<tr th:each="user : ${users}">   
-	       			<td th:text="${user.userName}" > </td>
-	       		
-	       			
-	       			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
-	     			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
-	            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
-	     
-	       			<td th:text="${user.userDetails.score}" > </td>
-	         	</tr>	
-	           
-	 		</tbody>
-	        </table> 
-	        
-	         <button type="submit" class="btn btn-default">Exit</button>
-	 	
-	 	</div>		
-     </form>
 
-	<div class="container">
-			<form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
-       	<div class="form-group">
-	       	<h4 class="text-center">Student Historical Results: </h4>	
-			<table class="table">
-			<thead>
-			    <tr>
-			        <th>Student</th>
-			        <th>Level</th>
-			        	<th>Score</th>
-			        <th>Timestamp</th>
-			   </tr>
-			 </thead>
-			 <tbody>     
-			            
-	     		<tr th:each="user : ${historicalUsers}">   
-	       			<td th:text="${user.userName}" > </td>
-	       		
-	       			
-	       			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
-	     			       <td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
-	            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
-	     
-	       			<td th:text="${user.userDetails.score}" > </td>
-	       			<td th:text="${user.userDetails.timestamp}" > </td>
-	       
-	         	</tr>	
-	           
-	 		</tbody>
-	        </table> 
-	        
-	         <button type="submit" class="btn btn-default">Exit</button>
-	 	
-	 	</div>		
-     </form>
-			
-	</div>
+ 		<form class="form-horizontal" action="#" th:action="@{/done}" th:method="post">
+	       	<div class="form-group">
+		       	<h4 class="text-center">Student Historical Results: </h4>	
+				<table class="table table-bordered table-striped">
+				<thead>
+				    <tr>
+				        <th>Student</th>
+				        <th>Level</th>
+				        	<th>Score</th>
+				        <th>Timestamp</th>
+				   </tr>
+				 </thead>
+				 <tbody>     
+				            
+		     		<tr th:each="user : ${historicalUsers}">   
+		       			<td th:text="${user.userName}" > </td>
+		         			   	
+		         			   	<td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 1"> Beginner</td>
+		     			       	<td class="text-primary" th:if="${user.userDetails.questionaireLevel} == 2" >Intermediate</td>
+		            			<td class="text-primary" th:if="${user.userDetails.questionaireLevel} >= 3" >Expert</td>
+		     
+		       			<td th:text="${user.userDetails.score}" > </td>
+		       			<td th:text="${user.userDetails.timestamp}" > </td>
+		       
+		         	</tr>	
+		           
+		 		</tbody>
+		        </table> 
+		        
+		         <button type="submit" class="btn btn-default">Exit</button>
+		 	</div>
+      	</form>
+			 
 	
       </div>
      </body>

@@ -1,6 +1,7 @@
 package controller;
  
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.QuestionaireDao;
 import model.FacultyStudent;
 import model.Questionaire;
 import model.User;
+import service.QuestionaireHandler;
 import service.UserDetailsHandler;
 
 @SessionAttributes( { "question_index", "something" })  
@@ -28,7 +31,9 @@ public class DashboardController {
 	
   @PostMapping("/initplay" )
   public ModelAndView get() { 
-	  Questionaire loadedQuestionaire = doMockQuestionaireLoad();
+	  //Questionaire loadedQuestionaire = doMockQuestionaireLoad();
+	  
+	  Questionaire loadedQuestionaire = doQuestionaireLoad();
 	  httpSession.setAttribute("questionaire", loadedQuestionaire);
 	  return new ModelAndView("game", "Questionaire", loadedQuestionaire );
   }
@@ -51,15 +56,32 @@ public class DashboardController {
   	  
 	  ModelAndView mv = new ModelAndView("facultyDashboard", "users", users);
 	  mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
-      return mv;
+
+   	  ArrayList<User> historicalUsers = (ArrayList<User>) userDetailsHandler.getFacultyStudentHistory(login);
+	  mv.getModelMap().addAttribute("historicalUsers", historicalUsers);
+
+	  
+	  return mv;
    }
+
+  
+  private Questionaire doQuestionaireLoad(){
+	  User user = (User) httpSession.getAttribute("login");
+	  QuestionaireHandler handler = new QuestionaireHandler();
+	  Questionaire q1 = handler.getQuestionaire(user);
+	   
+	  return q1;
+  }
+
+  
   
   private Questionaire doMockQuestionaireLoad(){
 	  
 	//TODO: initialize properly
 	   
 	  Questionaire q1 = new Questionaire();
-	    
+	  
+	  
 	  q1.setQuestion1("What's a standup meeting?");
 	  q1.setQuestion2("How long is an agile sprint?");
 	  q1.setQuestion3("What is XP?");

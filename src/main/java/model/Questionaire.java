@@ -3,9 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class Questionaire implements Serializable {
-	
-	//thymeleaf weird with arrays so just lining up q & a
-	
+	 
 	String question1;
 	private String question2;
 	private String question3;

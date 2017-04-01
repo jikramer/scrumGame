@@ -40,13 +40,12 @@ public class RegistrationController {
 		 handler.createUser(login);
 		 	
 		 UserDetails userDetails = login.getUserDetails();
-		 
+	 	 httpSession.setAttribute("login", login);
+			 
 		 if(userDetails.getUserType().equals(String.valueOf(Constants.FACULTY.value()))){
 			  //list of new faculty's users will always be empty
 			List<User> users = new ArrayList<User>();
-			httpSession.setAttribute("login", login);
-			
-			ModelAndView mv = new ModelAndView("facultyDashboard", "users", users );
+	 		ModelAndView mv = new ModelAndView("facultyDashboard", "users", users );
 			mv.getModelMap().addAttribute("FacultyStudent", new FacultyStudent());
 			
 			return mv;
