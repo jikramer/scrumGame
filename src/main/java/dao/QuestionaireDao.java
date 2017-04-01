@@ -17,7 +17,7 @@ public class QuestionaireDao {
 		UserDetails userDetails = new UserDetails();
 				
 		try{
-	      String query = "SELECT d.level FROM user_questionaire_detail d, user u where d.id = u.id and  u.username = '" +  user.getUserName()  + "'";
+	      String query = "SELECT max(d.level) as level FROM user_questionaire_detail d, user u where d.id = u.id and  u.username = '" +  user.getUserName()  + "'";
  
 	      Statement st = conn.createStatement();
 	      ResultSet rs = st.executeQuery(query);
@@ -38,13 +38,13 @@ public class QuestionaireDao {
 
 
 	private String convertLevel(int level){
-		if (level==1){
+		if (level<=1){
 			return "Beginner";
 		}
 		else if (level==2){
 			return "Intermediate";
 		}
-		else if (level==3){
+		else if (level>=3){
 			return "Expert";
 		}
 		else return "Beginner";

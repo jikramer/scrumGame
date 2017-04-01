@@ -66,12 +66,15 @@ public class GameController {
  	 	
 		GameHandler gameHandler = new GameHandler();
 	 	int score = gameHandler.scoreGame(userName, answeredQuestionaire);
+	 	
 	 	gameHandler.save(userName, score);
 	
 	 	User user = new User();
 		user.setUserName(userName);
 	 	UserDetailsDao userDetailsDao = new UserDetailsDao();
 		UserDetails userDetails = userDetailsDao.getUserDetails(user);
+		if(score >= 80)
+			userDetails.setQuestionaireLevel(userDetails.getQuestionaireLevel() + 1);
 	 	user.setUserDetails(userDetails);
 		
 		return new ModelAndView("score","User", user );

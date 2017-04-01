@@ -57,11 +57,11 @@ public class LoginController {
 	 private ModelAndView processLogin(User login){
 			UserDetailsHandler userDetailsHandler = new UserDetailsHandler();
 	    	login.setUserDetails(userDetailsHandler.getUserDetails(login));
-	    	
+	   		httpSession.setAttribute("login", login);
+	   	    	
 	    	//user is a faculty member, prep & show faculty dashboard
 	    	if(login.getUserDetails().getUserType().equals(String.valueOf(Constants.FACULTY.value()))){
 	    		ArrayList<User> users = (ArrayList<User>) getStudentFacultyDetails(login);
-	    		httpSession.setAttribute("login", login);
 	    		ModelAndView mv = new ModelAndView("facultyDashboard", "users", users);
 	    		FacultyStudent fs = new FacultyStudent();
 	    		ArrayList<User> historicalUsers = (ArrayList<User>) userDetailsHandler.getFacultyStudentHistory(login);
