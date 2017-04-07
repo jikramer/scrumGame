@@ -32,17 +32,21 @@ public class DBUtils {
 	private static void getProperties(){
 		
 		try {
-		
-			input = new FileInputStream("src/main/resources/config.properties");
+			//gradle deploy path	
+			input = new FileInputStream("../resources/main/config.properties");
 			props.load(input);
 	
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			try{
+				System.out.println("no config on release path, checking debug path...");
+
+				//eclipse debugger path
+				input = new FileInputStream("src/main/resources/config.properties");
+				props.load(input);
+ 			}catch (Exception ee) {
+ 			}
+ 		}
+				
 	}
 	
 		
