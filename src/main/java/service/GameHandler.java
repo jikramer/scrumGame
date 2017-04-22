@@ -11,7 +11,7 @@ public class GameHandler {
 		
 		int score = doSimpleScoring(loadedQuestionaire);
 		return score;
-	}
+	}	
 	
 	
 	/**
@@ -20,7 +20,7 @@ public class GameHandler {
 	 * @param loadedQuestionaire
 	 * @return
 	 */
-	private int doSimpleScoring(Questionaire loadedQuestionaire ) {
+	int doSimpleScoring(Questionaire loadedQuestionaire ) {
 		int score = 20;
 		
 		if ( loadedQuestionaire.getAnswer1().equals("4"))

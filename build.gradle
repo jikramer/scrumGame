@@ -42,7 +42,17 @@ task fatJar(type: Jar) {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+//	testCompile('org.springframework.boot:spring-boot-starter-test')
+ testCompile 'junit:junit:4.10'
 	runtime files('lib/mysql-connector-java-5.1.41-bin.jar')
 
 }
+
+
+test {
+    testLogging {
+        // Show that tests are run in the command-line output
+        events 'started', 'passed'
+    }
+}
+

@@ -1,8 +1,6 @@
 package utils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Properties;
  
 public class DBUtils {
+	private static Properties props = new Properties();
+	private static InputStream input = null;
 
 	/**
 	 * load the driver once only
@@ -26,9 +26,6 @@ public class DBUtils {
 	}
 	
 	
-	private static Properties props = new Properties();
-	private static InputStream input = null;
-	
 	private static void getProperties(){
 		
 		try {
@@ -44,9 +41,9 @@ public class DBUtils {
 				input = new FileInputStream("src/main/resources/config.properties");
 				props.load(input);
  			}catch (Exception ee) {
+ 				System.out.println("no config on debug path, unable to continue.");
  			}
- 		}
-				
+		}
 	}
 	
 		
@@ -56,7 +53,6 @@ public class DBUtils {
 		String url = props.getProperty("url");
 		String username = props.getProperty("userName");
 		String password = props.getProperty("password");
-	
 		
 		System.out.println("Connecting to database...");
 		Connection connection = null;
