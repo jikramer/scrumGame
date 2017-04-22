@@ -34,7 +34,7 @@ public class TestSimpleScoring {
 	@Test
 	public void testSimpleScoringFrontEdge() {
 
-		ArrayList<String> answers = buildAnswerSet("4","4","4","4");	
+		ArrayList<String> answers = buildAnswerSet("4","","","");	
 		Questionaire loadedQuestionaire = getLoadedQuestionaire(answers);
 		GameHandler gameHandler = new GameHandler();
 		int result = gameHandler.doSimpleScoring( loadedQuestionaire);
@@ -50,7 +50,7 @@ public class TestSimpleScoring {
 	@Test
 	public void testSimpleScoringBackEdge() {
 
-		ArrayList<String> answers = buildAnswerSet("3","3","3","3");	
+		ArrayList<String> answers = buildAnswerSet("","","","3");	
 		Questionaire loadedQuestionaire = getLoadedQuestionaire(answers);
 		GameHandler gameHandler = new GameHandler();
 		int result = gameHandler.doSimpleScoring( loadedQuestionaire);
